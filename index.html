@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Гра на сторінці</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Rubik+Mono+One&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f2efe8;
+      --ink: #152033;
+      --card: #fffdf8;
+      --sun: #ffd47d;
+      --leaf: #157347;
+      --line: #d5c8b2;
+      --accent: #e85d23;
+      --accent-dark: #b43f12;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at 8% 8%, #ffeec3 0, transparent 35%),
+        radial-gradient(circle at 92% 12%, #d8f3c8 0, transparent 28%),
+        linear-gradient(130deg, #f8f5ed 0%, #efe6d8 100%),
+        var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 24px 14px 40px;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero {
+      background: linear-gradient(140deg, rgba(255, 255, 255, 0.9), rgba(253, 246, 233, 0.94));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 12px 40px rgba(21, 32, 51, 0.08);
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(140deg, var(--accent), var(--accent-dark));
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(232, 93, 35, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .tag {
+      font-family: "Rubik Mono One", sans-serif;
+      font-size: clamp(12px, 2.8vw, 16px);
+      color: var(--leaf);
+      letter-spacing: 0.8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 4.5vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -0.4px;
+    }
+
+    .description {
+      margin: 0;
+      color: #304258;
+      font-size: clamp(15px, 2.7vw, 20px);
+      max-width: 780px;
+      font-weight: 600;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      grid-column: span 4;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px;
+      background: #fff;
+      font-size: 13px;
+      color: #2f3f54;
+      font-weight: 700;
+    }
+
+    main {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+
+    .frame-wrap {
+      border: 1px solid var(--line);
+      background: #f7efe0;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9.8;
+      box-shadow: 0 22px 48px rgba(21, 32, 51, 0.18);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .warn {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .mobile-hint {
+      display: none;
+      margin: 0;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      background: #fff8ea;
+      padding: 10px 12px;
+      color: #5b3c12;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 860px) {
+      .chip {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 620px) {
+      body {
+        padding: 10px 8px 20px;
+      }
+
+      .page {
+        gap: 10px;
+      }
+
+      .hero {
+        border-radius: 18px;
+        padding: 12px;
+        gap: 10px;
+      }
+
+      .hero-top {
+        align-items: flex-start;
+      }
+
+      .back-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .tag {
+        font-size: 11px;
+      }
+
+      .chip {
+        grid-column: span 12;
+        font-size: 12px;
+        padding: 9px 10px;
+      }
+
+      .status {
+        padding: 10px 11px;
+        font-size: 13px;
+      }
+
+      .frame-wrap {
+        border-radius: 14px;
+        aspect-ratio: 4 / 3;
+        min-height: 58svh;
+      }
+
+      .mobile-hint {
+        display: block;
+      }
+    }
+
+    @media (max-width: 920px) and (orientation: landscape) {
+      body {
+        padding: 8px 10px 12px;
+      }
+
+      .hero {
+        padding: 10px 12px;
+      }
+
+      .hero-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .chip {
+        grid-column: span 1;
+      }
+
+      .frame-wrap {
+        min-height: 72svh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <a class="back-btn" id="back-button" href="#">← Назад</a>
+        <div class="tag">SHOWCASE MODE</div>
+      </div>
+      <h1>Дорога Додому: пригоди Джонні</h1>
+      <p class="description">Допоможи яблуку Джонні знайти свій будинок. Перевір свою ловкість пальців.</p>
+      <div class="hero-grid">
+        <div class="chip">Формат: аркадна платформа</div>
+        <div class="chip">Керування: клавіатура</div>
+        <div class="chip">Мета: дістатися порталу</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="status" id="status">Підготовка запуску...</div>
+      <p class="mobile-hint">Для телефона: поверни екран горизонтально, так гра буде помітно зручнішою.</p>
+      <div class="frame-wrap">
+        <iframe id="player" allow="autoplay; fullscreen" allowfullscreen title="Game Player"></iframe>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var status = document.getElementById('status');
+      var iframe = document.getElementById('player');
+
+      if (location.protocol === 'file:') {
+        status.innerHTML = '<span class="warn">Відкрито як файл.</span> Для запуску гри відкрийте цю сторінку через локальний сервер: http://localhost:8000';
+        return;
+      }
+
+      var basePath = location.pathname.replace(/\/[^/]*$/, '/');
+      var projectUrl = location.origin + basePath + 'game.sb3';
+      var playerUrl = 'https://turbowarp.org/embed?autoplay&project_url=' + encodeURIComponent(projectUrl);
+
+      iframe.src = playerUrl;
+      status.textContent = 'Запущено. Якщо плеєр порожній, перевірте що game.sb3 лежить поруч із index.html.';
+    })();
+  </script>
+</body>
+</html>
